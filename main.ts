@@ -402,7 +402,7 @@ function processCollisions()
     })
     sprites.onOverlap(SpriteKind.Fire, SpriteKind.Flier, function (sprite, otherSprite) {
         sprite.destroy()
-        otherSprite.destroy(effects.trail, 250)
+        otherSprite.destroy()
     })
 
     //flower power
@@ -669,10 +669,11 @@ function spawnFire () {
         `, SpriteKind.Fire)
     fire.setPosition(hero.x, hero.y)
     if (heroFacingLeft) {
-        fire.setVelocity(-120, 0)
+        fire.setVelocity(-160, 0)
     } else {
-        fire.setVelocity(120, 0)
+        fire.setVelocity(160, 0)
     }
+    fire.startEffect(effects.fire);
 }
 
 function setLevelTileMap (level: number) {
