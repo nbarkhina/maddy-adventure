@@ -46,11 +46,6 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true
     },
-    "tile9": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAP//AAAAAAD/d3f/AAAA8Hd3d3cPAAB/d3d3d/cAAC93Inci9wAAf3J3J3J3DwB/d3cnd3cPAH9ydydydw8AL3cidyJ3DwDwd3d3J3cPAAB/d3d3dw8AAPB/d3d3DwAAAPB3d/cAAAAAAP//DwAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
     "tile7": {
         "data": "hwQQABAAAAAAAACAiIiIiAAAAICIiIiIAAAAgIiIiIgAAACAiI/4/wAAAICIiPiIAO7ujoiI+IgA7u6OiIj4iADu7o6IiPj/AO7ujoiPiIgAAACAiIiIiAAAAICIiIiIAAAAAAAA7gAAAAAAAADuAAAAAAAAAO4AAAAAAAAA7gAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
@@ -208,8 +203,7 @@
             "myTiles.tile6",
             "myTiles.tile3",
             "myTiles.tile4",
-            "myTiles.tile5",
-            "myTiles.tile7"
+            "myTiles.tile5"
         ],
         "displayName": "maddyLevel2"
     },
