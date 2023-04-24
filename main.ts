@@ -11,7 +11,6 @@ let heroLeft: animation.Animation = null
 let hasFire = false
 let doubleJumpSpeed = 0
 let canDoubleJump = false
-let coinAnimation: animation.Animation = null
 let currentLevel = 0
 let levelCount = 0
 let gravity = 0
@@ -209,7 +208,7 @@ function init()
 
     initializeAnimations()
 
-    levelCount = 8
+    levelCount = 1
     currentLevel = 0
 }
 
@@ -235,23 +234,23 @@ function showStartingInstructions()
         . . . . . . . . . . . . . . . . 
         `)
     game.setDialogCursor(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . f f 5 5 5 5 f f . . . . 
-        . . . . f 5 5 5 5 5 5 f . . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . . f 5 5 5 5 5 5 f . . . . 
-        . . . . f f 5 5 5 5 f f . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `)
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . f . f . . . .
+        . . . . . . f . . f . f . f f f
+        . . . . . . f . . f . f . f . f
+        . . . . . . f . . f f f . f f f
+        . . . . . . . . . . . . . f . .
+        . . . . . . . 3 3 3 . . . f . .
+        . . . . . 3 3 3 3 3 3 . . . . .
+        . . . . 3 3 3 3 3 3 . . . . . .
+        . . . . 3 3 3 3 3 3 3 . . . . .
+        . . . . 3 3 3 3 3 3 3 . . . . .
+        . . . . . . 3 3 3 . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `)
         
     //show beginning instructions
     showInstruction("Owly's Adventure!")
@@ -284,6 +283,12 @@ function gameUpdate()
         if (volcanoCounter == 10) {
             volcanoCounter = 0;
             animateVolcano();
+        }
+
+        if (info.score() >= 100)
+        {
+            info.changeLifeBy(1);
+            info.setScore(0);
         }
 
         // if (hero.vx < 0) {
@@ -356,7 +361,7 @@ function processCollisions()
         otherSprite.destroy(effects.trail, 250)
         otherSprite.y += -3
         //info.changeScoreBy(3)
-        info.changeLifeBy(1)
+        info.changeScoreBy(1)
         music.baDing.play()
     })
 
@@ -432,135 +437,6 @@ function processCollisions()
 
 function initializeAnimations()
 {
-    
-    //coin animations
-    coinAnimation = animation.createAnimation(ActionKind.Idle, 200)
-    coinAnimation.addAnimationFrame(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . f f 5 5 5 5 f f . . . . 
-        . . . . f 5 5 5 5 5 5 f . . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . f 5 5 5 4 4 5 5 5 f . . . 
-        . . . . f 5 5 5 5 5 5 f . . . . 
-        . . . . f f 5 5 5 5 f f . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `)
-    coinAnimation.addAnimationFrame(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . f f f f f f . . . . . . 
-        . . . f f 5 f 5 5 5 f . . . . . 
-        . . . f 5 f 5 5 5 5 5 f . . . . 
-        . . f 5 f 5 5 5 4 5 5 f . . . . 
-        . . f 5 f 5 5 5 4 4 5 5 f . . . 
-        . . f 5 f 5 5 5 4 4 5 5 f . . . 
-        . . f 5 f 5 5 5 4 5 5 f . . . . 
-        . . . f 5 f 5 5 5 5 5 f . . . . 
-        . . . . f 5 f 5 5 5 f . . . . . 
-        . . . . f f f f f f . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `)
-    coinAnimation.addAnimationFrame(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . f f f f f . . . . . . 
-        . . . . f f 5 f 5 f f . . . . . 
-        . . . f f 5 f 5 5 5 f . . . . . 
-        . . . f 5 f 5 5 5 5 f f . . . . 
-        . . . f 5 f 5 5 4 5 5 f . . . . 
-        . . . f 5 f 5 5 4 5 5 f . . . . 
-        . . . f 5 f 5 5 5 5 f f . . . . 
-        . . . f f 5 f 5 5 5 f . . . . . 
-        . . . . f f 5 f 5 f f . . . . . 
-        . . . . . f f f f f . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `)
-    coinAnimation.addAnimationFrame(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . . f f f f f . . . . . . 
-        . . . . . f 5 f 5 f f . . . . . 
-        . . . . . f 5 f 5 5 f . . . . . 
-        . . . . . f 5 f 5 5 f . . . . . 
-        . . . . . f 5 f 5 5 f . . . . . 
-        . . . . . f 5 f 5 5 f . . . . . 
-        . . . . . f 5 f 5 f f . . . . . 
-        . . . . . f f f f f . . . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `)
-    coinAnimation.addAnimationFrame(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . . . f f f f f . . . . . 
-        . . . . . f f 5 f 5 f . . . . . 
-        . . . . . f 5 5 f 5 f . . . . . 
-        . . . . . f 5 5 f 5 f . . . . . 
-        . . . . . f 5 5 f 5 f . . . . . 
-        . . . . . f 5 5 f 5 f . . . . . 
-        . . . . . f f 5 f 5 f . . . . . 
-        . . . . . . f f f f f . . . . . 
-        . . . . . . f f f f . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `)
-    coinAnimation.addAnimationFrame(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f f f . . . . . 
-        . . . . . f f 5 f 5 f f . . . . 
-        . . . . . f 5 5 5 f 5 f f . . . 
-        . . . . f f 5 5 5 5 f 5 f . . . 
-        . . . . f 5 5 4 5 5 f 5 f . . . 
-        . . . . f 5 5 4 5 5 f 5 f . . . 
-        . . . . f f 5 5 5 5 f 5 f . . . 
-        . . . . . f 5 5 5 f 5 f f . . . 
-        . . . . . f f 5 f 5 f f . . . . 
-        . . . . . . f f f f f . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `)
-    coinAnimation.addAnimationFrame(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . f f f f f f . . . . 
-        . . . . . f 5 5 5 f 5 f f . . . 
-        . . . . f 5 5 5 5 5 f 5 f . . . 
-        . . . . f 5 5 4 5 5 5 f 5 f . . 
-        . . . f 5 5 4 4 5 5 5 f 5 f . . 
-        . . . f 5 5 4 4 5 5 5 f 5 f . . 
-        . . . . f 5 5 4 5 5 5 f 5 f . . 
-        . . . . f 5 5 5 5 5 f 5 f . . . 
-        . . . . . f 5 5 5 f 5 f . . . . 
-        . . . . . . f f f f f f . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `)
     
     //initializeFlierAnimations
     flierIdle = animation.createAnimation(ActionKind.Idle, 100)
@@ -792,19 +668,7 @@ function setLevelTileMap (level: number) {
     if (level == 0) {
         tiles.setTilemap(tilemap`level0`)
     } else if (level == 1) {
-        tiles.setTilemap(tilemap`maddyLevel2`)
-    } else if (level == 2) {
-        tiles.setTilemap(tilemap`level_1`)
-    } else if (level == 3) {
-        tiles.setTilemap(tilemap`level_2`)
-    } else if (level == 4) {
-        tiles.setTilemap(tilemap`level_3`)
-    } else if (level == 5) {
-        tiles.setTilemap(tilemap`level_4`)
-    } else if (level == 6) {
-        tiles.setTilemap(tilemap`level_5`)
-    } else if (level == 7) {
-        tiles.setTilemap(tilemap`level_6`)
+        //tiles.setTilemap(tilemap`maddyLevel2`)
     }
 
     initializeLevel(level)
