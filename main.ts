@@ -254,7 +254,7 @@ function showStartingInstructions()
         `)
         
     //show beginning instructions
-    // showInstruction("Welcome to Madelyn's Adventure.")
+    showInstruction("Owly's Adventure!")
     // showInstruction("Greenstone goes around and tries to get all the bad guys.")
     // showInstruction("He has to shoot the bad guys with his fire Power.")
 }
@@ -355,7 +355,8 @@ function processCollisions()
     sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (sprite, otherSprite) {
         otherSprite.destroy(effects.trail, 250)
         otherSprite.y += -3
-        info.changeScoreBy(3)
+        //info.changeScoreBy(3)
+        info.changeLifeBy(1)
         music.baDing.play()
     })
 
@@ -564,23 +565,23 @@ function initializeAnimations()
     //initializeFlierAnimations
     flierIdle = animation.createAnimation(ActionKind.Idle, 100)
     flierIdle.addAnimationFrame(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . e e e e . . . . . . . 
-        . . . . . e e e e . . . . . . . 
-        . . . . . e e e e . . . . . . . 
-        . . . . . e e e e . . . . . . . 
-        . . . . . e e e e . . . . . . . 
-        8 8 8 8 8 8 8 8 8 8 8 . . . . . 
-        8 8 8 8 8 8 8 8 8 8 8 . . . . . 
-        8 8 8 8 8 8 8 8 8 8 8 . . . . . 
-        8 8 8 f 8 8 8 8 f 8 8 . . . . . 
-        8 8 8 8 8 8 8 8 8 8 8 . . . . . 
-        8 8 8 8 8 8 8 8 8 8 8 e e e e . 
-        8 8 8 f f f f f 8 8 8 e e e e . 
-        8 8 8 f 8 8 8 f 8 8 8 . . . . . 
-        8 8 8 f 8 8 8 f 8 8 8 . . . . . 
-        `)
+        . . . . . . . 3 e 3 . . . . . .
+        . . . . . . . 3 3 3 . . . . . .
+        . . . . . . . 3 . . . . . . . .
+        . . . . . . . 3 . . . . . . . .
+        . . . . a a a a a a a . . . . .
+        . . . . a a a a a a a . . . . .
+        . . . . a a a a a f a . . . . .
+        . . . . a a a f a f a . . . . .
+        . . . . a a a a a f a . . . . .
+        . . . . a a a a a a a . . . . .
+        . . . . a a a a a a a . . . . .
+        . . . . . f f f f f f f . . . .
+        . . . . . f f f . f f f . . . .
+        . . . . . f f f . f f f . . . .
+        . . . . . f f f . f f f . . . .
+        . . . . . f f f . f f f . . . .
+    `)
 
     heroLeft = animation.createAnimation(ActionKind.IdleLeft, 200)
     heroLeft.addAnimationFrame(img`
@@ -789,7 +790,7 @@ function setLevelTileMap (level: number) {
     clearGame()
 
     if (level == 0) {
-        tiles.setTilemap(tilemap`levelMaddy`)
+        tiles.setTilemap(tilemap`level0`)
     } else if (level == 1) {
         tiles.setTilemap(tilemap`maddyLevel2`)
     } else if (level == 2) {
@@ -825,6 +826,9 @@ function clearGame () {
     for (let value5 of sprites.allOfKind(SpriteKind.Fire)) {
         value5.destroy()
     }
+    for (let value5 of sprites.allOfKind(SpriteKind.Lava)) {
+        value5.destroy()
+    }
 }
 
 function createEnemies () {
@@ -832,21 +836,21 @@ function createEnemies () {
     for (let value52 of tiles.getTilesByType(assets.tile`tile4`)) {
         bumper = sprites.create(img`
             . . . . . . . . . . . . . . . .
+            . . . . . . . . f f f f . . . .
+            . . . . . . . f f . . f f . . .
+            . . . . . . . f . . . . f . . .
+            . . . . . . . f . f . . f . . .
+            . . . . . . . f . f f f f . . .
+            . . . . . . . f . . . . . . . .
+            . . . . . . a a a a . . . . . .
+            . . . . . a a a a a a . . . . .
+            . . . a a 7 7 7 a a a a . . . .
+            . . a a a 7 f 7 a a a a . . . .
+            . . a a a 7 7 7 a a a a . . . .
+            . . a a a a a a a a a a . . . .
+            . . . a a a a a f f f . . . . .
+            . . . . a a a a a a . . . . . .
             . . . . . . . . . . . . . . . .
-            f f f f f . . . . . . . f f f f
-            f 3 3 3 f . . . . . . . f 3 3 f
-            f f 3 3 f f f f f f f f f 3 f f
-            . f f f f 7 7 7 7 7 f f 3 3 f .
-            . . . . f 7 f 7 7 f 7 f f f f .
-            f f f f f 7 7 7 7 7 7 7 f . . .
-            f 3 3 3 f 7 7 7 7 7 7 7 f f f .
-            f f f f f 7 f f f 7 7 7 f 3 f f
-            . . . . f 7 7 7 7 7 7 7 f 3 f f
-            . . . f f f f 7 7 7 7 f f f f .
-            f f f 3 3 3 f f f f f f f f f .
-            f f 3 3 3 f f . . f f 3 3 3 f f
-            . f f f f f . . . . f f 3 3 3 f
-            . . . . . . . . . . . . f f f f
         `, SpriteKind.Bumper)
         tiles.placeOnTile(bumper, value52)
         tiles.setTileAt(value52, assets.tile`tile0`)
@@ -912,25 +916,25 @@ function spawnCoins () {
     for (let value7 of tiles.getTilesByType(assets.tile`tile5`)) {
         coin = sprites.create(img`
             . . . . . . . . . . . . . . . .
+            . . . . . . . . . f . f . . . .
+            . . . . . . f . . f . f . f f f
+            . . . . . . f . . f . f . f . f
+            . . . . . . f . . f f f . f f f
+            . . . . . . . . . . . . . f . .
+            . . . . . . . 3 3 3 . . . f . .
+            . . . . . 3 3 3 3 3 3 . . . . .
+            . . . . 3 3 3 3 3 3 . . . . . .
+            . . . . 3 3 3 3 3 3 3 . . . . .
+            . . . . 3 3 3 3 3 3 3 . . . . .
+            . . . . . . 3 3 3 . . . . . . .
             . . . . . . . . . . . . . . . .
-            . . . . . . . . . . . . . . . .
-            . . . . . . f f f f . . . . . .
-            . . . . f f 5 5 5 5 f f . . . .
-            . . . . f 5 5 5 5 5 5 f . . . .
-            . . . f 5 5 5 4 4 5 5 5 f . . .
-            . . . f 5 5 5 4 4 5 5 5 f . . .
-            . . . f 5 5 5 4 4 5 5 5 f . . .
-            . . . f 5 5 5 4 4 5 5 5 f . . .
-            . . . . f 5 5 5 5 5 5 f . . . .
-            . . . . f f 5 5 5 5 f f . . . .
-            . . . . . . f f f f . . . . . .
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . . . . . . .
         `, SpriteKind.Coin)
         tiles.placeOnTile(coin, value7)
-        animation.attachAnimation(coin, coinAnimation)
-        animation.setAction(coin, ActionKind.Idle)
+        //animation.attachAnimation(coin, coinAnimation)
+        //animation.setAction(coin, ActionKind.Idle)
         tiles.setTileAt(value7, assets.tile`tile0`)
     }
 }
