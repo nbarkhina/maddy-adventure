@@ -1,5 +1,5 @@
 {
-    "name": "maddy refactored",
+    "name": "baseline",
     "description": "",
     "dependencies": {
         "device": "*",
@@ -19,7 +19,7 @@
         "test.ts"
     ],
     "targetVersions": {
-        "target": "1.12.30",
+        "target": "1.12.56",
         "targetId": "arcade"
     },
     "supportedTargets": [
